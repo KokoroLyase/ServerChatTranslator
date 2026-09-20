@@ -22,6 +22,8 @@ It works on **any English-speaking server** (Hypixel, other international server
 
 Both lines compile the **same core logic**, so they behave identically, share the same configuration format, and expose the same commands. Pick the one matching your game version.
 
+> **Version support policy (since v3.1.1):** support for **MC 1.8.9** is frozen at **v3.1.1** — it is feature-complete with no known bugs and will receive no further updates. Future releases target **the latest Minecraft release only** (26.3+, Fabric line). Loader-wise, apart from the existing 1.8.9 line, this mod will **never support Forge** — Fabric only going forward.
+
 ### About the 1.8.9 build (it is a coremod)
 
 The 1.8.9 build is a **coremod**: at startup it performs a method-head injection on `EntityPlayerSP.sendChatMessage`.
@@ -203,6 +205,8 @@ MIT.
 | **1.8.9** | Forge | `Server-Chat-Translator_<版本>_mc1.8.9-forge.jar` | Forge 11.15.1.2318、Java 8 |
 
 两条线编译的是**同一份核心逻辑**，所以功能、配置格式、命令完全一致，按你的游戏版本选一个装即可。
+
+> **版本适配政策（自 v3.1.1 起）**：对 **MC 1.8.9** 的支持停留在 **v3.1.1**——该版本功能完整、无已知 Bug，此后不再更新；后续版本**只适配最新的 Minecraft 正式版**（26.3 起，Fabric 线）。加载器方面，除 1.8.9 这条存量线外，本模组**永不适配 Forge**，后续只跟 Fabric。
 
 ### 关于 1.8.9 版（它是核心插件）
 
