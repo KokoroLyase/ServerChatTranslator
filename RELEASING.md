@@ -58,11 +58,13 @@ git add -A && git commit -m "fix: ..."
 git push origin main
 
 # 4) 打 tag 并推送 —— CI 会自动构建并创建 Release
-#    tag 名格式是 v<版本>-mc<游戏版本>-<加载器>（§10.2），两条线各打一个：
+#    tag 名格式是 v<版本>-mc<游戏版本>-<加载器>（§10.2）。
+#    **自 v3.1.1 起只打 Fabric 一个**（版本适配政策见 §10.2）；
+#    下面 Forge 两条命令仅适用于历史参考与应急情形：
 git tag -a v<mod_version>-mc<minecraft_version>-fabric -m "Server Chat Translator v<mod_version> (MC <minecraft_version> / Fabric)"
 git push origin v<mod_version>-mc<minecraft_version>-fabric
-git tag -a v<mod_version>-mc<forge_minecraft_version>-forge -m "Server Chat Translator v<mod_version> (MC 1.8.9 / Forge)"
-git push origin v<mod_version>-mc<forge_minecraft_version>-forge
+# git tag -a v<mod_version>-mc1.8.9-forge -m "..."        # （v3.1.1 起冻结，勿再使用）
+# git push origin v<mod_version>-mc1.8.9-forge
 ```
 
 两个 workflow 各盯自己的 tag glob：`build.yml` 只认 `v*-mc*-fabric`、
@@ -273,7 +275,11 @@ CI 建的 Release 只有一句自动生成的 `**Full Changelog**` 占位（v1.0
   这样「看到 jar 的名字就知道该找哪个 Release」，反过来也一样，而不必为了一个字符去动摇 tag 规则
   （两个 workflow 的 glob 都依赖它，收益接近零）。
   只写 `-fabric` / `-forge` 不够 —— 光看 tag 分不出是给哪个 Minecraft 版本的，
-  而两条线将来各自都可能再支持别的游戏版本。
+  而 Fabric 线将来还可能适配新的游戏版本。
+
+  > **版本适配政策（v3.1.1 起）**：对 **MC 1.8.9** 的支持停留在 **v3.1.1**（功能完整、无已知 Bug），
+  > **Forge 线此后不再打新 tag、不再发版**；后续发版只走 Fabric 线（最新 MC 正式版）。
+  > `build-forge.yml` 与本节的 Forge 规则保留，仅作历史参考与应急之用。
 - **历史遗留**：≤ v2.2.3 的 Release 用的是加后缀之前的旧名（`v2.2.3`、`v1.1.3` …），
   一律**保持原样不动**（§4）。v2.3.0 这两个 Release 定名前改过两次，经过见 §4。
 - 两个 workflow 各盯自己的后缀：`build.yml` 只在 `v*-mc*-fabric` 上发 Release，
@@ -282,6 +288,7 @@ CI 建的 Release 只有一句自动生成的 `**Full Changelog**` 占位（v1.0
   写成 `v*-mc*-<加载器>` 而不是 `v*-<加载器>`，是为了让「漏了 mc 段」的名字
   **不会**自动发版 —— 宁可什么都不发、让人工发现名字写错。
 - 两条线的 Release 说明都必须写三段（§3）；Forge 线还要写明它是 coremod。
+  （v3.1.1 起 Forge 线冻结，此条仅适用于历史条目维护与应急情形。）
 
 ### 10.3 产物可复现性与核对方式（两条线不一样，别用错判据）
 

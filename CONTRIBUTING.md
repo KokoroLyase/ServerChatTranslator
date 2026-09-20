@@ -15,6 +15,9 @@
 Forge 在 `forge-1.8.9/src/main/java`）。这意味着一条硬约束：**共享层只能用 Java 8 的语法与 API**。
 改共享层之前请务必读 [RELEASING.md](RELEASING.md) §10。
 
+> **版本适配政策（v3.1.1 起）**：对 MC 1.8.9 的支持停留在 v3.1.1，Forge 线不再发新版本；
+> 后续只适配最新 Minecraft 正式版（Fabric）。共享层维持 Java 8 约束不变（1.8.9 线仍需可编译）。
+
 ## 提 issue 之前
 
 - 先确认**用的是最新版**，并说清你玩的是哪条线（26.3 / Fabric 还是 1.8.9 / Forge），
